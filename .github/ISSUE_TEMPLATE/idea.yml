@@ -1,0 +1,11 @@
+name: Idea or another game
+description: Suggest a feature, or a game you'd like a console for.
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+      description: For a new game, say where it writes its logs if you know.
+    validations:
+      required: true

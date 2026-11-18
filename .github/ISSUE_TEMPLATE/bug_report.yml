@@ -1,0 +1,38 @@
+name: Bug report
+description: A console misses something, shows something wrong, or won't start.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting! The more of this you fill in, the faster I can fix it.
+  - type: dropdown
+    id: game
+    attributes:
+      label: Which console?
+      options: [Kingdom Come Deliverance II, Kenshi, Mass Effect Legendary Edition]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Console version
+      description: Shown in the console's title bar or at the top of the script.
+      placeholder: "1.1"
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Your setup
+      description: Game version, mod manager (Vortex, MO2, manual) and roughly how many mods.
+      placeholder: "Steam 1.5.6, Vortex, ~150 mods"
+  - type: textarea
+    id: log
+    attributes:
+      label: Log lines
+      description: Paste the relevant part of the console's saved session log. Please remove anything personal first (your Windows user name appears in file paths).
+      render: text
