@@ -3,7 +3,8 @@
 # Loveless Mod Consoles
 
 Live log consoles for heavily modded PC games. Each one is a single PowerShell script that sits **next to** the game: it follows the game's logs as you play, groups the noise, checks your mod setup before you launch, and explains what happened when the game crashes, with every session's logs saved before the game can overwrite them.
-n**Download:** get the zip for your game from [the latest release](../../releases/latest). Questions? Ask in the [Discord](https://discord.gg/qcmgVa2Fx6).
+
+**Download:** get the zip for your game from [the latest release](../../releases/latest). Questions? Ask in the [Discord](https://discord.gg/qcmgVa2Fx6).
 
 | Game | Folder | Status |
 |---|---|---|
