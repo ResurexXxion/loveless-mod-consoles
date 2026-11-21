@@ -2106,7 +2106,8 @@ function Describe-NtCode([uint32]$c) {
         3221226356 { return 'HEAP CORRUPTION' }
         3221226505 { return 'FAIL-FAST / stack buffer overrun' }
         3221225501 { return 'ILLEGAL INSTRUCTION' }
-        3762504530 { return 'C++ exception (0xE06D7363)' }
+        3765269347 { return 'C++ exception (0xE06D7363)' }
+        3762504530 { return 'unhandled .NET exception (0xE0434352)' }
         2147483651 { return 'BREAKPOINT' }
         2289434629 { return 'DXGI_ERROR_DEVICE_REMOVED (0x887A0005)' }
         default { return 'exception' }
@@ -2372,7 +2373,7 @@ function Post-Mortem {
         else { $v.Add('Exit code 0: the game closed itself normally. The log has no CSystem::Quit line, which not every normal close writes. Nothing to chase.') }
     }
     else {
-        if ($hw -gt 0 -or $rebooted) { $v.Add('Hardware/system events were logged around the end (red lines above). A reboot, driver reset or storage error is not caused by a mod: check hardware first (your Corsair Commander Pro / PCIe-DMI history applies).') }
+        if ($hw -gt 0 -or $rebooted) { $v.Add('Hardware/system events were logged around the end (red lines above). A reboot, driver reset or storage error is not caused by a mod: check hardware first (temperatures, drivers, RAM stability, RGB/fan controllers, PCIe and storage devices).') }
         if ($null -ne $code -and $code -ne 0) { $v.Add('The process died with ' + (Describe-Exit $code) + '.') }
         elseif ($null -eq $code) { $v.Add('Exit code could not be read.') }
         if ($S.Phase -like 'Mod Lua*' -and $S.LuaInitLast) { $v.Add('It ended while mod Lua scripts were initialising; the last one started was "' + $S.LuaInitLast + '" - first suspect (confirm by disabling it).') }

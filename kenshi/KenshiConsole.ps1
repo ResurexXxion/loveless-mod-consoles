@@ -1211,7 +1211,8 @@ function Describe-NtCode([uint32]$c) {
         3221226356 { return 'HEAP CORRUPTION' }
         3221226505 { return 'FAIL-FAST / stack buffer overrun' }
         3221225501 { return 'ILLEGAL INSTRUCTION' }
-        3762504530 { return 'C++ exception (0xE06D7363)' }
+        3765269347 { return 'C++ exception (0xE06D7363)' }
+        3762504530 { return 'unhandled .NET exception (0xE0434352)' }
         2147483651 { return 'BREAKPOINT' }
         default { return 'exception' }
     }
@@ -1332,7 +1333,7 @@ function Post-Mortem {
     $clean = ($code -eq 0) -and ($S.ContainsKey('CleanExit') -and $S.CleanExit) -and ($dumpInfo.Count -eq 0)
     if ($clean) { $v.Add('Clean shutdown: exit code 0 and the save system logged "Exit.". Nothing to chase.') }
     else {
-        if ($hw -gt 0) { $v.Add('Hardware/system events were logged around the end (red lines above). A reboot, driver reset or storage error is not caused by a mod; check hardware first (your Commander Pro / PCIe history applies).') }
+        if ($hw -gt 0) { $v.Add('Hardware/system events were logged around the end (red lines above). A reboot, driver reset or storage error is not caused by a mod; check hardware first (temperatures, drivers, RAM stability, RGB/fan controllers, PCIe and storage devices).') }
         if ($null -ne $code -and $code -ne 0) { $v.Add('The process died with ' + (Describe-Exit $code) + '.') }
         elseif ($null -eq $code) { $v.Add('Exit code could not be read.') }
         if ($S.Phase -like 'Loading game data*' -and $S.ModsLoaded -gt 0) { $v.Add('It ended while mods were loading, after "' + $S.ModLast + '" (#' + $S.ModsLoaded + '). The mod after it in mods.cfg is the first suspect; confirm with the Ogre/RE log and a dump.') }

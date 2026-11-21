@@ -1184,7 +1184,7 @@ function Describe-NtCode([uint32]$c) {
     switch ($c) {
         3221225477 { return 'ACCESS VIOLATION' } 3221225620 { return 'DIVIDE BY ZERO' } 3221225725 { return 'STACK OVERFLOW' }
         3221226356 { return 'HEAP CORRUPTION' } 3221226505 { return 'FAIL-FAST / stack buffer overrun' } 3221225501 { return 'ILLEGAL INSTRUCTION' }
-        3762504530 { return 'C++ exception (0xE06D7363)' } 2147483651 { return 'BREAKPOINT' } default { return 'exception' }
+        3765269347 { return 'C++ exception (0xE06D7363)' } 3762504530 { return 'unhandled .NET exception (0xE0434352)' } 2147483651 { return 'BREAKPOINT' } default { return 'exception' }
     }
 }
 function Describe-Module([string]$mod) {
@@ -1272,7 +1272,7 @@ function Post-Mortem {
     $clean = ($code -eq 0) -and $S.CleanExit -and ($dumpInfo.Count -eq 0) -and ($appErr.Count -eq 0)
     if ($clean) { $v.Add('Clean shutdown: exit code 0 and the proxy reached "goodbye". Nothing to chase.') }
     else {
-        if ($hw -gt 0) { $v.Add('Hardware/system events were logged around the end (red lines above). A reboot, driver reset or storage error is not caused by a mod; check hardware first (Commander Pro / PCIe history applies).') }
+        if ($hw -gt 0) { $v.Add('Hardware/system events were logged around the end (red lines above). A reboot, driver reset or storage error is not caused by a mod; check hardware first (temperatures, drivers, RAM stability, RGB/fan controllers, PCIe and storage devices).') }
         if ($null -ne $code -and $code -ne 0) { $v.Add('The process ended with ' + (Describe-Exit $code) + '.') }
         elseif ($null -eq $code) { $v.Add('Exit code could not be read.') }
         foreach ($a in $appErr) { if ($a.ContainsKey('Module') -and $a.Module) { $v.Add('Windows Application Error names the faulting module ' + $a.Module + ' (exception ' + $a.Exc + '): ' + (Describe-Module $a.Module)) } }
